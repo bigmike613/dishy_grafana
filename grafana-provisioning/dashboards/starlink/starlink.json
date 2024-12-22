@@ -25,9 +25,8 @@
   "editable": true,
   "fiscalYearStartMonth": 0,
   "graphTooltip": 0,
-  "id": 4,
+  "id": 2,
   "links": [],
-  "liveNow": false,
   "panels": [
     {
       "datasource": {
@@ -40,11 +39,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -53,6 +54,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -97,6 +99,30 @@
                 "value": "dB"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.history.downlink_throughput_bps"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Download"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.history.uplink_throughput_bps"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Upload"
+              }
+            ]
           }
         ]
       },
@@ -123,7 +149,7 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -197,6 +223,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -204,10 +231,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -286,6 +315,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -293,10 +323,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -325,116 +357,8 @@
     {
       "datasource": {
         "type": "influxdb",
-        "uid": "QO9OCO_Mz"
+        "uid": "PECD259BA12A47BBC"
       },
-      "description": "",
-      "fieldConfig": {
-        "defaults": {
-          "color": {
-            "mode": "palette-classic"
-          },
-          "custom": {
-            "axisCenteredZero": false,
-            "axisColorMode": "text",
-            "axisLabel": "",
-            "axisPlacement": "auto",
-            "barAlignment": 0,
-            "drawStyle": "line",
-            "fillOpacity": 0,
-            "gradientMode": "none",
-            "hideFrom": {
-              "legend": false,
-              "tooltip": false,
-              "viz": false
-            },
-            "lineInterpolation": "linear",
-            "lineWidth": 1,
-            "pointSize": 5,
-            "scaleDistribution": {
-              "type": "linear"
-            },
-            "showPoints": "auto",
-            "spanNulls": false,
-            "stacking": {
-              "group": "A",
-              "mode": "none"
-            },
-            "thresholdsStyle": {
-              "mode": "off"
-            }
-          },
-          "mappings": [],
-          "thresholds": {
-            "mode": "absolute",
-            "steps": [
-              {
-                "color": "green",
-                "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
-              }
-            ]
-          }
-        },
-        "overrides": []
-      },
-      "gridPos": {
-        "h": 4,
-        "w": 4,
-        "x": 20,
-        "y": 0
-      },
-      "id": 10,
-      "options": {
-        "legend": {
-          "calcs": [],
-          "displayMode": "list",
-          "placement": "bottom",
-          "showLegend": true
-        },
-        "tooltip": {
-          "mode": "single",
-          "sort": "none"
-        }
-      },
-      "pluginVersion": "9.1.2",
-      "targets": [
-        {
-          "datasource": {
-            "type": "influxdb",
-            "uid": "QO9OCO_Mz"
-          },
-          "groupBy": [],
-          "measurement": "spacex.starlink.user_terminal.status",
-          "orderByTime": "ASC",
-          "policy": "default",
-          "queryType": "randomWalk",
-          "refId": "A",
-          "resultFormat": "time_series",
-          "select": [
-            [
-              {
-                "params": [
-                  "is_snr_above_noise_floor"
-                ],
-                "type": "field"
-              }
-            ]
-          ],
-          "tags": []
-        }
-      ],
-      "title": "SNR Above Floor",
-      "type": "timeseries"
-    },
-    {
-      "datasource": {
-        "type": "influxdb",
-        "uid": "starlinkstats"
-      },
-      "description": "",
       "fieldConfig": {
         "defaults": {
           "color": {
@@ -450,60 +374,80 @@
               },
               {
                 "color": "red",
-                "value": 1
+                "value": 80
               }
             ]
           },
-          "unit": "none"
+          "unit": "s"
         },
         "overrides": []
       },
       "gridPos": {
-        "h": 3,
+        "h": 4,
         "w": 4,
-        "x": 12,
-        "y": 4
+        "x": 20,
+        "y": 0
       },
-      "id": 14,
+      "id": 15,
       "options": {
         "colorMode": "value",
         "graphMode": "area",
         "justifyMode": "center",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
-          "calcs": [
-            "lastNotNull"
-          ],
+          "calcs": [],
           "fields": "",
           "values": false
         },
-        "text": {},
-        "textMode": "auto"
+        "showPercentChange": false,
+        "textMode": "value",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
-          "groupBy": [],
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PECD259BA12A47BBC"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "measurement": "spacex.starlink.user_terminal.status",
           "orderByTime": "ASC",
           "policy": "default",
-          "queryType": "randomWalk",
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
               {
                 "params": [
-                  "pop_ping_drop_rate"
+                  "obstruction_duration"
                 ],
                 "type": "field"
+              },
+              {
+                "params": [],
+                "type": "max"
               }
             ]
           ],
           "tags": []
         }
       ],
-      "title": "Ping Drop Rate",
+      "title": "Max obstruction time",
       "type": "stat"
     },
     {
@@ -593,8 +537,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 16,
+        "w": 6,
+        "x": 12,
         "y": 4
       },
       "id": 12,
@@ -603,6 +547,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -610,10 +555,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -714,8 +661,8 @@
       },
       "gridPos": {
         "h": 3,
-        "w": 4,
-        "x": 20,
+        "w": 6,
+        "x": 18,
         "y": 4
       },
       "id": 13,
@@ -724,6 +671,7 @@
         "graphMode": "area",
         "justifyMode": "auto",
         "orientation": "auto",
+        "percentChangeColorMode": "standard",
         "reduceOptions": {
           "calcs": [
             "lastNotNull"
@@ -731,10 +679,12 @@
           "fields": "",
           "values": false
         },
+        "showPercentChange": false,
         "text": {},
-        "textMode": "auto"
+        "textMode": "auto",
+        "wideLayout": true
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
@@ -772,11 +722,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -785,6 +737,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -841,6 +794,42 @@
                 "value": "short"
               }
             ]
+          },
+          {
+            "__systemRef": "hideSeriesFrom",
+            "matcher": {
+              "id": "byNames",
+              "options": {
+                "mode": "exclude",
+                "names": [
+                  "spacex.starlink.user_terminal.history.pop_ping_latency_ms"
+                ],
+                "prefix": "All except:",
+                "readOnly": true
+              }
+            },
+            "properties": [
+              {
+                "id": "custom.hideFrom",
+                "value": {
+                  "legend": false,
+                  "tooltip": false,
+                  "viz": true
+                }
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.history.pop_ping_latency_ms"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "POP ICMP Latency"
+              }
+            ]
           }
         ]
       },
@@ -868,14 +857,16 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "groupBy": [],
           "measurement": "spacex.starlink.user_terminal.history",
           "orderByTime": "ASC",
           "policy": "default",
+          "query": "SELECT \"pop_ping_latency_ms\" FROM \"spacex.starlink.user_terminal.history\" WHERE $timeFilter",
           "queryType": "randomWalk",
+          "rawQuery": false,
           "refId": "A",
           "resultFormat": "time_series",
           "select": [
@@ -886,20 +877,12 @@
                 ],
                 "type": "field"
               }
-            ],
-            [
-              {
-                "params": [
-                  "pop_ping_drop_rate"
-                ],
-                "type": "field"
-              }
             ]
           ],
           "tags": []
         }
       ],
-      "title": "Latency & Drop Rate",
+      "title": "Latency",
       "type": "timeseries"
     },
     {
@@ -914,11 +897,13 @@
             "mode": "palette-classic"
           },
           "custom": {
+            "axisBorderShow": false,
             "axisCenteredZero": false,
             "axisColorMode": "text",
             "axisLabel": "",
             "axisPlacement": "auto",
             "barAlignment": 0,
+            "barWidthFactor": 0.6,
             "drawStyle": "line",
             "fillOpacity": 10,
             "gradientMode": "none",
@@ -927,6 +912,7 @@
               "tooltip": false,
               "viz": false
             },
+            "insertNulls": false,
             "lineInterpolation": "linear",
             "lineWidth": 1,
             "pointSize": 5,
@@ -957,6 +943,300 @@
               }
             ]
           },
+          "unit": "ms"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.status.pop_ping_drop_rate"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.history.pop_ping_drop_rate"
+            },
+            "properties": [
+              {
+                "id": "unit",
+                "value": "short"
+              }
+            ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.history.pop_ping_drop_rate"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "POP ICMP Drop Rate"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 12,
+        "x": 12,
+        "y": 7
+      },
+      "id": 16,
+      "options": {
+        "legend": {
+          "calcs": [
+            "mean",
+            "lastNotNull",
+            "max",
+            "min"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "multi",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "groupBy": [],
+          "measurement": "spacex.starlink.user_terminal.history",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "queryType": "randomWalk",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "pop_ping_drop_rate"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [
+                  "*-1+100"
+                ],
+                "type": "math"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "ICMP",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "PECD259BA12A47BBC"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "auto",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "watt"
+        },
+        "overrides": [
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.power.last"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "Power Usage"
+              }
+            ]
+          }
+        ]
+      },
+      "gridPos": {
+        "h": 7,
+        "w": 24,
+        "x": 0,
+        "y": 14
+      },
+      "id": 17,
+      "options": {
+        "legend": {
+          "calcs": [
+            "lastNotNull",
+            "min",
+            "max"
+          ],
+          "displayMode": "table",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.4.0",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "PECD259BA12A47BBC"
+          },
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
+          "measurement": "spacex.starlink.user_terminal.power",
+          "orderByTime": "ASC",
+          "policy": "default",
+          "refId": "A",
+          "resultFormat": "time_series",
+          "select": [
+            [
+              {
+                "params": [
+                  "latest_power"
+                ],
+                "type": "field"
+              },
+              {
+                "params": [],
+                "type": "last"
+              }
+            ]
+          ],
+          "tags": []
+        }
+      ],
+      "title": "Power Usage",
+      "type": "timeseries"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "starlinkstats"
+      },
+      "description": "",
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 10,
+            "gradientMode": "opacity",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineWidth": 1,
+            "pointSize": 5,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "never",
+            "spanNulls": true,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "thresholds": {
+            "mode": "percentage",
+            "steps": [
+              {
+                "color": "green",
+                "value": null
+              }
+            ]
+          },
           "unit": "percentunit"
         },
         "overrides": [
@@ -971,14 +1251,26 @@
                 "value": "s"
               }
             ]
+          },
+          {
+            "matcher": {
+              "id": "byName",
+              "options": "spacex.starlink.user_terminal.status.mean"
+            },
+            "properties": [
+              {
+                "id": "displayName",
+                "value": "% Obstructed"
+              }
+            ]
           }
         ]
       },
       "gridPos": {
         "h": 7,
-        "w": 12,
-        "x": 12,
-        "y": 7
+        "w": 24,
+        "x": 0,
+        "y": 21
       },
       "id": 8,
       "options": {
@@ -998,20 +1290,32 @@
           "sort": "none"
         }
       },
-      "pluginVersion": "8.5.3",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
             "type": "influxdb",
-            "uid": "starlinkstats"
+            "uid": "PECD259BA12A47BBC"
           },
-          "groupBy": [],
+          "groupBy": [
+            {
+              "params": [
+                "$__interval"
+              ],
+              "type": "time"
+            },
+            {
+              "params": [
+                "null"
+              ],
+              "type": "fill"
+            }
+          ],
           "hide": false,
           "measurement": "spacex.starlink.user_terminal.status",
           "orderByTime": "ASC",
           "policy": "default",
-          "queryType": "randomWalk",
-          "refId": "B",
+          "refId": "A",
           "resultFormat": "time_series",
           "select": [
             [
@@ -1022,32 +1326,8 @@
                 "type": "field"
               },
               {
-                "params": [
-                  "*100"
-                ],
-                "type": "math"
-              },
-              {
-                "params": [
-                  "Percent Obstructed"
-                ],
-                "type": "alias"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "obstruction_duration"
-                ],
-                "type": "field"
-              }
-            ],
-            [
-              {
-                "params": [
-                  "obstruction_interval"
-                ],
-                "type": "field"
+                "params": [],
+                "type": "mean"
               }
             ]
           ],
@@ -1055,7 +1335,6 @@
         }
       ],
       "title": "Obstructions Data",
-      "transformations": [],
       "type": "timeseries"
     },
     {
@@ -1067,209 +1346,58 @@
       "fieldConfig": {
         "defaults": {
           "color": {
-            "mode": "thresholds"
+            "fixedColor": "transparent",
+            "mode": "shades"
           },
           "custom": {
             "align": "center",
-            "displayMode": "auto",
+            "cellOptions": {
+              "mode": "gradient",
+              "type": "color-background"
+            },
             "filterable": false,
             "inspect": false
           },
-          "mappings": [],
+          "mappings": [
+            {
+              "options": {
+                "false": {
+                  "color": "semi-dark-green",
+                  "index": 1,
+                  "text": "False"
+                },
+                "true": {
+                  "color": "semi-dark-red",
+                  "index": 0,
+                  "text": "True"
+                }
+              },
+              "type": "value"
+            }
+          ],
           "thresholds": {
             "mode": "absolute",
             "steps": [
               {
                 "color": "green",
                 "value": null
-              },
-              {
-                "color": "red",
-                "value": 80
               }
             ]
           }
         },
-        "overrides": [
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "State"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 120
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Obstructed"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 88
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Bad Location"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 102
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Temp Throttled"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 116
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Temp Shutdown"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 119
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Motors Stuck"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 103
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Mast Not Vertical"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 128
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Slow Speed"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 94
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Time (last)"
-            },
-            "properties": [
-              {
-                "id": "custom.width"
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Software Version"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 320
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Roaming"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 79
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Heating"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 84
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Unexpected Loc."
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 121
-              }
-            ]
-          },
-          {
-            "matcher": {
-              "id": "byName",
-              "options": "Unexpected Location"
-            },
-            "properties": [
-              {
-                "id": "custom.width",
-                "value": 153
-              }
-            ]
-          }
-        ]
+        "overrides": []
       },
       "gridPos": {
-        "h": 5,
+        "h": 9,
         "w": 24,
         "x": 0,
-        "y": 14
+        "y": 28
       },
       "id": 11,
-      "links": [],
       "options": {
+        "cellHeight": "sm",
         "footer": {
+          "countRows": false,
           "fields": "",
           "reducer": [
             "sum"
@@ -1279,7 +1407,7 @@
         "showHeader": true,
         "sortBy": []
       },
-      "pluginVersion": "9.1.2",
+      "pluginVersion": "11.4.0",
       "targets": [
         {
           "datasource": {
@@ -1292,9 +1420,9 @@
           "measurement": "spacex.starlink.user_terminal.status",
           "orderByTime": "ASC",
           "policy": "default",
-          "query": "SELECT \"state\" AS \"State\", \"alert_roaming\" AS \"Roaming\", \"currently_obstructed\" AS \"Obstructed\", \"alert_unexpected_location\" AS \"Bad Location\", \"alert_thermal_throttle\" AS \"Temp Throttled\", \"alert_thermal_shutdown\" AS \"Temp Shutdown\", \"alert_motors_stuck\" AS \"Motors Stuck\", \"software_version\" AS \"Software Version\", \"alert_slow_ethernet_speeds\" AS \"Slow Speed\", \"alert_is_heating\" AS \"Heating\", \"alert_mast_not_near_vertical\" AS \"Mast Not Vertical\" FROM \"spacex.starlink.user_terminal.status\" WHERE $timeFilter",
+          "query": "SELECT \"state\" AS \"State\", \"currently_obstructed\" AS \"Obstructed\", \"alert_unexpected_location\" AS \"Unexpected Location\", \"alert_thermal_throttle\" AS \"Temp Throttled\", \"alert_thermal_shutdown\" AS \"Temp Shutdown\", \"alert_motors_stuck\" AS \"Motors Stuck\", \"software_version\" AS \"Software Version\", \"alert_install_pending\" AS \"Install Pending\",  \"alert_slow_ethernet_speeds\" AS \"Slow Speed\", \"alert_mast_not_near_vertical\" AS \"Mast Not Vertical\", \"alert_is_heating\" AS \"Heating\", \"alert_roaming\" AS \"Roaming\" FROM \"spacex.starlink.user_terminal.status\" WHERE $timeFilter",
           "queryType": "randomWalk",
-          "rawQuery": false,
+          "rawQuery": true,
           "refId": "A",
           "resultFormat": "table",
           "select": [
@@ -1474,6 +1602,10 @@
                 "aggregations": [],
                 "operation": "groupby"
               },
+              "Install Pending": {
+                "aggregations": [],
+                "operation": "groupby"
+              },
               "Mast Not Vertical": {
                 "aggregations": [],
                 "operation": "groupby"
@@ -1547,19 +1679,21 @@
           "id": "organize",
           "options": {
             "excludeByName": {},
+            "includeByName": {},
             "indexByName": {
               "Heating": 3,
+              "Install Pending": 10,
               "Mast Not Vertical": 7,
               "Motors Stuck": 6,
               "Obstructed": 2,
-              "Roaming": 10,
+              "Roaming": 11,
               "Slow Speed": 8,
               "Software Version": 9,
               "State": 1,
               "Temp Shutdown": 5,
               "Temp Throttled": 4,
               "Time (last)": 0,
-              "Unexpected Location": 11
+              "Unexpected Location": 12
             },
             "renameByName": {
               "State": "",
@@ -1571,26 +1705,34 @@
       "type": "table"
     }
   ],
+  "preload": false,
   "refresh": "30s",
-  "schemaVersion": 37,
-  "style": "dark",
+  "schemaVersion": 40,
   "tags": [],
   "templating": {
     "list": [
       {
+        "current": {
+          "text": "starlinkstats",
+          "value": "starlinkstats"
+        },
         "hide": 2,
         "label": "InfluxDB DataSource",
         "name": "DS_INFLUXDB",
         "query": "starlinkstats",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "type": "constant"
       },
       {
+        "current": {
+          "text": "spacex.starlink.user_terminal.status",
+          "value": "spacex.starlink.user_terminal.status"
+        },
         "hide": 2,
         "label": "Table name for Statistics",
         "name": "TBL_STATS",
         "query": "spacex.starlink.user_terminal.status",
-        "skipUrlSync": false,
+        "skipUrlSync": true,
         "type": "constant"
       }
     ]
@@ -1599,23 +1741,10 @@
     "from": "now/d",
     "to": "now"
   },
-  "timepicker": {
-    "refresh_intervals": [
-      "5s",
-      "10s",
-      "30s",
-      "1m",
-      "5m",
-      "15m",
-      "30m",
-      "1h",
-      "2h",
-      "1d"
-    ]
-  },
+  "timepicker": {},
   "timezone": "browser",
-  "title": "Statistics",
+  "title": "Starlink Statistics",
   "uid": "ymkHwLaMz",
-  "version": 44,
+  "version": 23,
   "weekStart": "sunday"
 }
