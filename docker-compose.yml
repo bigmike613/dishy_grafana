@@ -38,8 +38,8 @@ services:
     restart: always
 
   grpc:
-    image: sponsianus/starlink-grpc-tools
-    command: "dish_grpc_influx.py -t 1 -a -v status obstruction_detail alert_detail ping_drop ping_run_length ping_latency ping_loaded_latency usage bulk_history"
+    image: miketomasulo/starlink-grpc-tools
+    command: "dish_grpc_influx.py -t 1 -a -v status power obstruction_detail alert_detail ping_drop ping_run_length ping_latency ping_loaded_latency usage bulk_history"
     depends_on:
       - influxdb
     env_file:
